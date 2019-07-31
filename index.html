@@ -15,11 +15,9 @@
     <script type="text/javascript" src="./css/functions.js" charset="utf-8"></script>
     <script type="text/javascript" src="./css/love.js" charset="utf-8"></script>
     <style type="text/css">
-        <!--
         .STYLE1 {
-            color: #666666
+            color: #fdb338
         }
-        -->
     </style>
 </head>
 
@@ -31,33 +29,27 @@
         <div id="wrap">
             <div id="text">
                 <div id="code">
-                    <font color="#FF0000">
-                        <span class="say">
-                            <h1>我希望有个如你一般的人</h1>
-                        </span><br><br>
+                    <div>
+                        <span class="say"><h1>我希望有个如你一般的人</h1></span><br><br>
                         <span class="say">我希望有个如你一般的人</span><br> <br>
                         <span class="say">如这山间清晨一般明亮清爽</span><br><br>
-                        <span class="say">如奔赴古城道路上阳光一般的人</span><br><br>
+                        <span class="say">如奔赴古城道路上阳光一般</span><br><br>
                         <span class="say">温暖而不炙热，覆盖我所有肌肤</span><br><br>
                         <span class="say">由起点到夜晚，由山野到书房</span><br><br>
                         <span class="say">一切问题的答案都很简单</span><br><br>
                         <span class="say">我希望有个如你一般的人</span><br><br>
                         <span class="say">贯彻未来，数遍生命的公路</span><br><br>
                         <span class="say"><span class="space"></span> -- 袁智翔 --</span><br>
-                        <span class="say">
-                            <h1>七夕快乐!</h1>
-                        </span><br>
-                    </font>
+                        <span class="say"><h1>七夕快乐!</h1></span><br>
+                    </div>
                 </div>
             </div>
-            <div id="clock-box">
-                <!-- <span class="STYLE1"></span><font color="#33CC00">距离我喜欢你，</font>
-<span class="STYLE1">已经是……</span> -->
-                <span class="STYLE1"></span>
-                <font color="#33CC00"></font>
-                <span class="STYLE1"></span>
-                <!-- <div id="clock"></div> -->
-            </div>
+            <!-- <div id="clock-box">
+                <span color="#fdb338"></span>
+                <font size=3 color="#fdb338">距离我喜欢你，</font>
+                <font size=3 color="#fdb338">已经是……</font>
+                <div id="clock"></div>
+            </div> -->
             <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
 
@@ -67,7 +59,7 @@
     </script>
 
     <script>
-        (function () {
+        (function() {
             var canvas = $('#canvas');
 
             if (!canvas[0].getContext) {
@@ -120,8 +112,9 @@
             var foot = tree.footer;
             var hold = 1;
 
-            canvas.click(function (e) {
-                var offset = canvas.offset(), x, y;
+            canvas.click(function(e) {
+                var offset = canvas.offset(),
+                    x, y;
                 x = e.pageX - offset.left;
                 y = e.pageY - offset.top;
                 if (seed.hover(x, y)) {
@@ -130,14 +123,15 @@
                     canvas.unbind("mousemove");
                     canvas.removeClass('hand');
                 }
-            }).mousemove(function (e) {
-                var offset = canvas.offset(), x, y;
+            }).mousemove(function(e) {
+                var offset = canvas.offset(),
+                    x, y;
                 x = e.pageX - offset.left;
                 y = e.pageY - offset.top;
                 canvas.toggleClass('hand', seed.hover(x, y));
             });
 
-            var seedAnimate = eval(Jscex.compile("async", function () {
+            var seedAnimate = eval(Jscex.compile("async", function() {
                 seed.draw();
                 while (hold) {
                     $await(Jscex.Async.sleep(10));
@@ -153,21 +147,21 @@
                 }
             }));
 
-            var growAnimate = eval(Jscex.compile("async", function () {
+            var growAnimate = eval(Jscex.compile("async", function() {
                 do {
                     tree.grow();
                     $await(Jscex.Async.sleep(10));
                 } while (tree.canGrow());
             }));
 
-            var flowAnimate = eval(Jscex.compile("async", function () {
+            var flowAnimate = eval(Jscex.compile("async", function() {
                 do {
                     tree.flower(2);
                     $await(Jscex.Async.sleep(10));
                 } while (tree.canFlower());
             }));
 
-            var moveAnimate = eval(Jscex.compile("async", function () {
+            var moveAnimate = eval(Jscex.compile("async", function() {
                 tree.snapshot("p1", 240, 0, 610, 680);
                 while (tree.move("p1", 500, 0)) {
                     foot.draw();
@@ -183,7 +177,7 @@
                 canvas.css("background", "none");
             }));
 
-            var jumpAnimate = eval(Jscex.compile("async", function () {
+            var jumpAnimate = eval(Jscex.compile("async", function() {
                 var ctx = tree.ctx;
                 while (true) {
                     tree.ctx.clearRect(0, 0, width, height);
@@ -193,15 +187,16 @@
                 }
             }));
 
-            var textAnimate = eval(Jscex.compile("async", function () {
-                var together = new Date();
-                together.setFullYear(2009, 10, 23);      //时间年月日
-                together.setHours(16);            //小时  
-                together.setMinutes(53);          //分钟
-                together.setSeconds(0);         //秒前一位
-                together.setMilliseconds(2);        //秒第二位
+            var textAnimate = eval(Jscex.compile("async", function() {
 
                 $("#code").show().typewriter();
+
+                var together = new Date();
+                together.setFullYear(2014, 9, 1); //时间年月日
+                together.setHours(16); //小时  
+                together.setMinutes(53); //分钟
+                together.setSeconds(0); //秒前一位
+                together.setMilliseconds(2); //秒第二位
                 $("#clock-box").fadeIn(500);
                 while (true) {
                     timeElapse(together);
@@ -209,14 +204,13 @@
                 }
             }));
 
-            var runAsync = eval(Jscex.compile("async", function () {
+            var runAsync = eval(Jscex.compile("async", function() {
                 $await(seedAnimate());
                 $await(growAnimate());
                 $await(flowAnimate());
                 $await(moveAnimate());
 
                 textAnimate().start();
-
                 $await(jumpAnimate());
             }));
 
