@@ -22,9 +22,10 @@
 </head>
 
 <body>
-    <audio autoplay="autopaly">
+    <audio style="display:none; height: 0" id="bg-music" preload="auto" src="music/love.mp3" loop="loop"></audio>
+    <!-- <audio autoplay="autopaly">
         <source src="music/love.mp3" type="audio/mp3" />
-    </audio>
+    </audio> -->
     <div id="main">
         <div id="wrap">
             <div id="text">
@@ -83,6 +84,16 @@
     </script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function audioAutoPlay() {
+                var audio = document.getElementById('bg-music');
+                audio.play();
+                document.addEventListener("WeixinJSBridgeReady", function() {
+                    audio.play();
+                }, false);
+            }
+            audioAutoPlay();
+        });
         (function() {
             var canvas = $('#canvas');
 
@@ -241,7 +252,6 @@
             runAsync().start();
         })();
     </script>
-
 </body>
 
 </html>
