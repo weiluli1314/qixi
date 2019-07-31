@@ -33,7 +33,7 @@ $(window).resize(function() {
                 if (progress >= str.length) {
                     clearInterval(timer);
                 }
-            }, 55);
+            }, 50);
         });
         return this;
     };
